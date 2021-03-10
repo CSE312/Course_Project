@@ -1,5 +1,4 @@
 {% extends "blog/base.html" %}
-{% load crispy_forms_tags %}
 {% block content%}
 
 <img src="
@@ -56,20 +55,5 @@
     </tr>
   </tbody>
 </table>
-
-
-    <div class="update-form ">
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <fieldset class="form-group">
-                <legend class="text-center border-bottom mt-3 mb-4 display-4">Update Information</legend>
-                {{ info_form|crispy }}
-                {{ picture_form|crispy }}
-            </fieldset>
-            <div class="form-group">
-                <button class="btn btn-outline-info mt-2 mb-2" type="submit">Update</button>
-            </div>
-        </form>
-    </div>
 
 {% endblock %}

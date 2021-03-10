@@ -1,34 +1,38 @@
 from django.shortcuts import render, redirect
 from .models import Post
+from authentication.models import Profile
 from django.contrib.auth.decorators import login_required
 from authentication.forms import PictureUpdateForm, UserUpdateForm
 from django.contrib import messages
-
 from django.contrib.auth.models import User
 from django.contrib.sessions.models import Session
 from django.utils import timezone
 
 
 def get_all_logged_in_users():
-    # Query all non-expired sessions
-    # use timezone.now() instead of datetime.now() in latest versions of Django
-    sessions = Session.objects.filter(expire_date__gte=timezone.now())
-    uid_list = []
+    unexpired_sessions = Session.objects.filter(expire_date__gte=timezone.now())
+    logged_in = []
 
-    # Build a list of user ids from that query
-    for session in sessions:
-        data = session.get_decoded()
-        uid_list.append(data.get('_auth_user_id', None))
+    for session in unexpired_sessions:
+        temp = session.get_decoded()
+        if temp:
+            logged_in.append(Profile.objects.filter(user_id=temp['_auth_user_id']))
 
-    # Query all logged in users based on id list
-    return User.objects.filter(id__in=uid_list)
+    return logged_in[0]
+
+
+def get_all_users():
+    signed_up = Profile.objects.all()
+    return signed_up
+
 
 # Create your views here.
 @login_required
 def home(request):
-    k = get_all_logged_in_users()
-    print(k)
-    return render(request, 'blog/Home.html')
+    profiles = get_all_users()
+    logged_in = get_all_logged_in_users()
+    context = {'profile': profiles, 'logged_in': logged_in}
+    return render(request, 'blog/Home.html', context)
 
 
 @login_required
