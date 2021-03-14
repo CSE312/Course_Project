@@ -134,9 +134,9 @@ LOGIN_URL = 'login'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-#AWS S3 information (Image hosting) 
-AWS_ACCESS_KEY_ID = 'AKIATTWR7B7R2P6PFTNN'
-AWS_SECRET_ACCESS_KEY = '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'
+#AWS IAM information (Image hosting) 
+AWS_ACCESS_KEY_ID = 'AKIATTWR7B7RZEYWKOXP'
+AWS_SECRET_ACCESS_KEY = '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'
 AWS_STORAGE_BUCKET_NAME = 'cse312-project-files'
 
 AWS_S3_FILE_OVERWRITE = False
