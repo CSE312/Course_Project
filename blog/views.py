@@ -18,7 +18,7 @@ def get_all_logged_in_users():
         if temp:
             logged_in.append(Profile.objects.filter(user_id=temp['_auth_user_id']))
 
-    return logged_in[0]
+    return logged_in
 
 
 def get_all_users():
