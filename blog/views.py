@@ -15,7 +15,7 @@ def get_all_logged_in_users():
 
     for session in unexpired_sessions:
         temp = session.get_decoded()
-        if temp:
+        if temp and Profile.objects.filter(user_id=temp['_auth_user_id'])[0] not in logged_in:
             logged_in.append(Profile.objects.filter(user_id=temp['_auth_user_id'])[0])
 
     return logged_in
