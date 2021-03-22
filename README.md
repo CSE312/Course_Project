@@ -11,7 +11,7 @@ Features going to be implemented:
 2) Live interactions
 
 ## Side Note
-This is a django application and it currently deployed on a heroku server
+This is a django application and it is currently deployed on a heroku server
 
 **Link to site:**
 https://cse312-web-project.herokuapp.com/
