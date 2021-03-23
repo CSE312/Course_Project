@@ -11,17 +11,18 @@ Features going to be implemented:
 2) Live interactions
 
 ## Docker Compose Instructions
-1) Change the directory to the root directory Course_Project
+1) Change the directory to the root directory Course_Project.
    >`cd Course_Project`.
-2) Migrate any lingering data to postgreSQL
+2) Migrate any lingering data to postgreSQL.
    >`cd docker-compose run web python manage.py migrate`
    
-3) Run docker composer
+3) Run docker composer.
    >`docker-compose up`
 
 4) Open http://localhost:8000/
+   >'http://localhost:8000'
 
-5) Once you are down with testing the database and web application, delete the docker composer 
+5) Once you are down with testing the database and web application, delete the docker composer .
    >`docker-compose down`
    
 ## Side Note
