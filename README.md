@@ -10,7 +10,7 @@ Features going to be implemented:
 1) Sending Direct Messages
 2) Live interactions
 
-## Docker Compose Instruction
+## Docker Compose Instructions
 1) Change the directory to the root directory Course_Project
    cd Course_Project
 2) Migrate any lingering data to postgreSQL
