@@ -20,7 +20,7 @@ Features going to be implemented:
    >`docker-compose up`
 
 4) Open http://localhost:8000/
-   >'http://localhost:8000'
+   >`http://localhost:8000`
 
 5) Once you are down with testing the database and web application, delete the docker composer .
    >`docker-compose down`
