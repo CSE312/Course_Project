@@ -14,7 +14,7 @@ Features going to be implemented:
 1) Change the directory to the root directory Course_Project.
    >`cd Course_Project`.
 2) Migrate any lingering data to postgreSQL.
-   >`cd docker-compose run web python manage.py migrate`
+   >`docker-compose run web python manage.py migrate`
    
 3) Run docker composer.
    >`docker-compose up`
