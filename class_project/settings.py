@@ -27,7 +27,8 @@ SECRET_KEY = '48^+*2^^hua2i4-q0&5hy^ywus36kkh^p3fzp&t)&&-n_0rcg8'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['cse312-web-project.herokuapp.com']
+#For development purposes, allowing all hosts (helps with Docker component/containers). NOT IDEAL for production!
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -81,8 +82,12 @@ WSGI_APPLICATION = 'class_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'db',
+        'PORT': 5432,
     }
 }
 
