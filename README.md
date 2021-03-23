@@ -10,6 +10,17 @@ Features going to be implemented:
 1) Sending Direct Messages
 2) Live interactions
 
+## Docker Compose Instruction
+1) Change the directory to the root directory Course_Project
+   cd Course_Project
+2) Migrate any lingering data to postgreSQL
+   docker-compose run web python manage.py migrate
+3) Run docker composer
+   docker-compose up
+4) Open http://localhost:8000/
+5) Once you are down with testing the database and web application, delete the docker composer 
+   docker-compose down
+
 ## Side Note
 This is a django application and it is currently deployed on a Heroku server.
 
