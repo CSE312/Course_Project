@@ -13,11 +13,12 @@ Features going to be implemented:
 ## Docker Compose Instructions
 1) Change the directory to the root directory Course_Project.
    >`cd Course_Project`.
-2) Migrate any lingering data to postgreSQL.
-   >`docker-compose run web python manage.py migrate`
+
+2) Build the image.
+   >`docker-compose build`
    
-3) Run docker composer.
-   >`docker-compose up`
+3) Run docker compose
+   >`docker-compose up --detach`
 
 4) Open http://localhost:8000/
    >`http://localhost:8000`
