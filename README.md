@@ -31,7 +31,7 @@ Features going to be implemented:
    >`docker-compose down`
    
 ## Side Note
-This is a django application and it is currently deployed on a Heroku server.
+This is a Django application and it is currently deployed on a Heroku server.
 
 **Link to site:**
 https://cse312-web-project.herokuapp.com/
