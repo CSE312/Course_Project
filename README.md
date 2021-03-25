@@ -25,7 +25,7 @@ Features going to be implemented:
 
 5) Open http://localhost:8000/
    >`http://localhost:8000`
- If nothing pops up on locahost:8000, please run step 3 again.
+ [If nothing pops up on locahost:8000, please run step 3 again.]
 
 6) (OPTIONAL) Once you are done with testing the database and web application, delete the docker composer.
    >`docker-compose down`
