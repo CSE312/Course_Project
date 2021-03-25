@@ -14,7 +14,7 @@ Features going to be implemented:
 1) Change the directory to the root directory Course_Project.
    >`cd Course_Project`
 
-2) Build the image.
+2) Build the image
    >`docker-compose build`
    
 3) Run docker compose
