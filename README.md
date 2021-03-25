@@ -23,7 +23,10 @@ Features going to be implemented:
 4) Open http://localhost:8000/
    >`http://localhost:8000`
 
-5) (OPTIONAL) Once you are done with testing the database and web application, delete the docker composer.
+5) Migrate database
+   >`docker-compose run web python manage.py migrate`
+
+6) (OPTIONAL) Once you are done with testing the database and web application, delete the docker composer.
    >`docker-compose down`
    
 ## Side Note
