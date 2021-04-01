@@ -63,3 +63,24 @@ def demo(request):
         'posts': Post.objects.all()
     }
     return render(request, 'blog/demo.html', context)
+
+@login_required
+def contact(request,id):
+    logged_in = get_all_logged_in_users()
+    receiver = logged_in[0]
+    for user in logged_in:
+        if id == user.id:
+            receiver = user
+            break
+    context = {
+        'receiver': receiver.user,
+        'posts': Post.objects.all()
+    }
+    return render(request, 'blog/contact.html', context)
+
+@login_required
+def myMessages(request):
+    context = {
+        'posts': Post.objects.all()
+    }
+    return render(request, 'blog/messages.html', context)

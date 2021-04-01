@@ -1,0 +1,22 @@
+{% extends "blog/base.html" %}
+{% block content%}
+
+<h1 class="display-3 text-center">Direct Message</h1>
+
+<div class="container">
+    <div class="row">
+
+        <h4> From: {{user.username}}</h4>
+        <h4> To: {{receiver.username}}</h4>
+
+
+        <textarea id="message" name="message" rows="4" cols="50"></textarea>
+
+        <hr>
+        
+        <button class="w-100 btn btn-primary btn-lg" type="submit">Send Message</button>
+
+    </div>
+</div>
+
+{% endblock %}
