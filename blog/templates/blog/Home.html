@@ -1,46 +1,16 @@
 {% extends "blog/base.html" %}
-{% block content%}
-
-<h1 class="display-3 text-center">Hola!</h1>
-
-<div class="container">
-    <div class="row">
-
-
-        <div class="col">
-        <div  style="margin-left: -2vw; width: 55vw; ">
-            {% for u in profile %}
-
-            <div  class="card border-dark  mt-3  mb-3 " style="width:25vw; display: inline-block;" >
-                <img class="card-img-top " style="height:20vw;" src="{{u.image.url}}" alt="{{u.user.first_name}}'s Profile Picture">
-                <div class="card-body">
-
-                    <h5 class="card-title text-center">{{u.user.username}}</h5>
-                    <p class="card-text text-center text-muted">{{u.user.first_name}} {{u.user.last_name}}</p>
+{% block content %}
+    {% for post in posts %}
+        <article class="media content-section">
+            <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
+            <div class="media-body">
+                <div class="article-metadata">
+                    <a class="mr-2" href="#">{{ post.author }}</a>
+                    <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
                 </div>
-                  <div class="card-footer text-center">
-                    <a href="#" class="btn btn-outline-primary btn ">Profile</a>
-                  </div>
+                <h2 class="text-muted">{{ post.title }}</h2>
+                <p class="article-content">{{ post.content }}</p>
             </div>
-
-            {% endfor %}
-        </div>
-        </div>
-
-        <div class="bg-light border border-dark col mt-3"  >
-            <h3 class="h4 mt-3 text-center"><u> Logged in Users</u></h3>
-                <ul class="list-group ">
-                {% for s in logged_in %}
-                      <div class="container" style="margin-top: 2vw;">
-                          <img  class="img-fluid rounded-circle float-start " style="width:6vw; height:6vw " src="{{s.image.url}}"/>
-                          <p class="h5 mt-4 ">{{s.user.username}}</p>
-                      </div>
-
-                {% endfor %}
-                </ul>
-        </div>
-
-    </div>
-</div>
-
-{% endblock %}
+        </article>
+    {% endfor %}
+{% endblock content %}
