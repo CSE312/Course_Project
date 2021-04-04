@@ -40,18 +40,24 @@ def home(request):
     return render(request, 'blog/Home.html', context)
 
 
+def demo(request):
+    context = {
+        'posts': Post.objects.all()
+    }
+    return render(request, 'blog/demo.html', context)
+
+
 # Create your views here.
 @login_required
 def friends(request):
     profiles = get_all_users()
     logged_in = get_all_logged_in_users()
-    context = {'profile': profiles, 'logged_in': logged_in} # this is the old code with all signed up users
+    context = {'profile': profiles, 'logged_in': logged_in}  # this is the old code with all signed up users
     # displaying context = {'posts': Post.objects.all(), 'logged_in': logged_in} #
-            # Me trying to combine posts and users -> doesnt work
+    # Me trying to combine posts and users -> doesnt work
     # context = {'posts': Post.objects.all()}
     return render(request, 'blog/Friends.html', context)
     # return render(request, 'blog/Home.html', context)
-
 
 
 @login_required
@@ -75,13 +81,6 @@ def profile(request):
     }
 
     return render(request, 'blog/Profile.html', context)
-
-
-def demo(request):
-    context = {
-        'posts': Post.objects.all()
-    }
-    return render(request, 'blog/demo.html', context)
 
 
 class PostListView(ListView):
