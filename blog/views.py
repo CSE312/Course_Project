@@ -37,7 +37,8 @@ def home(request):
     context = {
         'posts': Post.objects.all()
     }
-    return render(request, 'blog/Home.html', context)
+    print(context)
+    return render(request, 'blog/home.html', context)
 
 
 def demo(request):
@@ -86,7 +87,7 @@ def profile(request):
 class PostListView(ListView):
     model = Post
     template_name = 'blog/Home.html'  # <app>/<model>_<viewtype>.html
-    content_object_name = 'posts'
+    context_object_name = 'posts'
     ordering = ['-date_posted']
 
 
