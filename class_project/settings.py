@@ -35,6 +35,7 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'authentication.apps.AuthenticationConfig',
+    'direct_message.apps.DirectMessageConfig',
     'blog.apps.BlogConfig',
     'crispy_forms',
     'django.contrib.admin',

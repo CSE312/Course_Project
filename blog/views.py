@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Post
 from authentication.models import Profile
+from direct_message.models import Message
 from django.contrib.auth.decorators import login_required
 from authentication.forms import PictureUpdateForm, UserUpdateForm
 from django.contrib import messages
@@ -29,14 +30,24 @@ def get_all_users():
 # Create your views here.
 @login_required
 def home(request):
+    messages = Message.get_messages(user=request.user)
+    i = 0
+    for message in messages:
+        if message.is_read == False:
+            i = i + 1
     profiles = get_all_users()
     logged_in = get_all_logged_in_users()
-    context = {'profile': profiles, 'logged_in': logged_in}
+    context = {'profile': profiles, 'logged_in': logged_in, 'unread': i}
     return render(request, 'blog/Home.html', context)
 
 
 @login_required
 def profile(request):
+    messages = Message.get_messages(user=request.user)
+    i = 0
+    for message in messages:
+        if message.is_read == False:
+            i = i + 1
     if request.method == 'POST':
         info_form = UserUpdateForm(request.POST, instance=request.user)
         picture_form = PictureUpdateForm(request.POST, request.FILES, instance=request.user.profile)
@@ -52,7 +63,8 @@ def profile(request):
 
     context = {
         'info_form': info_form,
-        'picture_form': picture_form
+        'picture_form': picture_form, 
+        'unread': i
     }
 
     return render(request, 'blog/Profile.html', context)
@@ -64,23 +76,67 @@ def demo(request):
     }
     return render(request, 'blog/demo.html', context)
 
+
+@login_required
+def SendMessage(request):
+	from_user = request.POST.get('from_user')
+	to_user = request.POST.get('to_user')
+	body = request.POST.get('body')
+	
+	Message.send_message(from_user, to_user, body)
+	return redirect('inbox')
+
+
 @login_required
 def contact(request,id):
-    logged_in = get_all_logged_in_users()
-    receiver = logged_in[0]
-    for user in logged_in:
+    messages = Message.get_messages(user=request.user)
+    i = 0
+    for message in messages:
+        if message.is_read == False:
+            i = i + 1
+    users = get_all_users()
+    receiver = users[0]
+    for user in users:
         if id == user.id:
             receiver = user
             break
     context = {
         'receiver': receiver.user,
-        'posts': Post.objects.all()
+        'posts': Post.objects.all(), 
+        'unread': i
     }
     return render(request, 'blog/contact.html', context)
 
+#@login_required
+#def contact(request,id):
+#    logged_in = get_all_logged_in_users()
+#    from_user = request.user
+#    receiver = logged_in[0]
+#    for user in logged_in:
+#        if id == user.id:
+#            receiver = user
+#            break
+#	to_user = User.objects.get(username=to_user_username)
+#	Message.send_message(from_user, to_user, body)
+#
+#    context = {
+#        'from_user': from_user,
+#        'to_user': receiver.user,
+#    }
+#    return render(request, 'blog/contact.html', context)
+
 @login_required
-def myMessages(request):
+def inbox(request):
+    messages = Message.get_messages(user=request.user)
+    users = get_all_users()
+    i = 0
+    for message in messages:
+        if message.is_read == False:
+            i = i + 1
+    messages.update(is_read=True)
     context = {
-        'posts': Post.objects.all()
+        'messages': messages, 
+        'users': users,
+        'unread':i
     }
-    return render(request, 'blog/messages.html', context)
+    return render(request, 'blog/inbox.html', context)
