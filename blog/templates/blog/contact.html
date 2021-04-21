@@ -12,12 +12,12 @@
 
                 <div class="row">
 
-                    <input type="hidden" name="to_user" value="{{ receiver }}">
-                    <input type="hidden" name="from_user" value="{{ user }}">
+                    <input type="hidden" name="to_user" value="{{ recipient }}">
+                    <input type="hidden" name="from_user" value="{{ sender }}">
 
 
-                    <h4> From: {{user.username}}</h4>
-                    <h4> To: {{receiver.username}}</h4>
+                    <h4> From: {{sender.username}}</h4>
+                    <h4> To: {{recipient.username}}</h4>
     
                     <textarea id="body" name="body" rows="4" cols="50"></textarea>
     

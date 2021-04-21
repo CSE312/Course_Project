@@ -35,7 +35,7 @@
                           <img  class="img-fluid rounded-circle float-start " style="width:6vw; height:6vw " src="{{s.image.url}}"/>
                           <p class="h5 mt-4 ">{{s.user.username}}</p>
                           {% if s.user.username != user.username%}
-                          <a href="/blog/contact/{{s.user.id}}/" class="btn btn-outline-primary btn ">Contact</a>
+                          <a href="/blog/contact/{{user.id}}/{{s.user.id}}" class="btn btn-outline-primary btn ">Contact</a>
                           {% endif %}
 
                       </div>

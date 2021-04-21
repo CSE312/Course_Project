@@ -79,29 +79,35 @@ def demo(request):
 
 @login_required
 def SendMessage(request):
-	from_user = request.POST.get('from_user')
 	to_user = request.POST.get('to_user')
 	body = request.POST.get('body')
+	from_user = request.user
+
 	
 	Message.send_message(from_user, to_user, body)
 	return redirect('inbox')
 
 
 @login_required
-def contact(request,id):
+def contact(request,senderid,recipientid):
     messages = Message.get_messages(user=request.user)
     i = 0
     for message in messages:
         if message.is_read == False:
             i = i + 1
     users = get_all_users()
-    receiver = users[0]
+    recipient = users[0]
+    sender = users[0]
     for user in users:
-        if id == user.id:
-            receiver = user
-            break
+        if recipientid == user.id:
+            recipient = user
+        if senderid == user.id:
+            sender = user
+        
     context = {
-        'receiver': receiver.user,
+        'recipient': recipient.user,
+        'users': users,
+        'sender': sender.user,
         'posts': Post.objects.all(), 
         'unread': i
     }

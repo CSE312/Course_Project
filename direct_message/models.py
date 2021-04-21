@@ -5,13 +5,16 @@ from django.dispatch import receiver
 
 
 class Message(models.Model):
-	from_user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='from_user')
-	to_user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='to_user')
+	from_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='from_user')
+	to_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='to_user')
 	body = models.TextField(max_length=280, blank=True, null=True)
 	is_read = models.BooleanField(default=False)
 
 	def send_message(from_user, to_user, body):
 		message = Message(
+			#from_user = User.objects.get(id=from_user.id)
+			#to_user = User.objects.get(id=to_user.id)
+
 			from_user=from_user,
 			to_user=to_user,
 			body=body,

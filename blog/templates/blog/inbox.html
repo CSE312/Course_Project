@@ -15,11 +15,7 @@
       <tr>
         <td class="name">From {{message.from_user}}:</td>
         <td class="subject" colspan="2">{{message.body}} </td>
-          {% for u in users %}
-            {% if u.user == message.from_user %}
-              <td class="subject" colspan="2"><a href="/blog/contact/{{u.user.id}}/" class="btn btn-outline-primary btn ">Reply</a></td>
-            {% endif %}
-          {% endfor %}
+        <td class="subject" colspan="2"><a href="/blog/contact/{{message.to_user.id}}/{{message.from_user.id}}" class="btn btn-outline-primary btn ">Reply</a></td>
       </tr>
 
     <!--<div  class="card border-dark  mt-3  mb-3 " style="width:25vw; display: inline-block;" >
@@ -40,38 +36,6 @@
 
 
 {% endif %}
-
-
-<div class="box">
-  <article class="media">
-    <div class="media-left">
-      <!--<figure class="image is-64x64">
-          {% if message.user.profile.picture %}
-            <img src="{{ message.user.profile.picture.url }}" alt="Placeholder image">
-          {% else %}
-            <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
-          {% endif %}
-      </figure>-->
-    </div>
-    <div class="media-content">
-
-      <div class="content">
-        <p>
-        <!--  <strong>{{ message.user.profile.first_name }} {{ message.user.profile.last_name }}</strong> <small>@{{ message.user.username }}</small>-->
-        </p>
-      </div>
-
-      <div class="content">
-        <!--{% if message.unread %}
-        <p style="font-weight: bold; color: red;">
-          <i class="material-icons">mark_chat_unread</i> {{ message.unread }}
-        </p>
-        {% endif %}        -->
-      </div>
-
-    </div>
-  </article>
-</div>
 
 
 <div class="container">
