@@ -12,7 +12,7 @@ Features going to be implemented:
 
 ## Docker Compose Instructions
 1) Change the directory to the root directory Course_Project.
-   >`cd Course_Project`
+   >`cd Course_Project` 
 
 2) Build the image.
    >`docker-compose build`

@@ -7,13 +7,23 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.sessions.models import Session
 from django.utils import timezone
-from django.shortcuts import render
+from django.urls import reverse
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import (
     ListView,
     DetailView,
     CreateView,
     DeleteView)
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.http import HttpResponseRedirect
+
+
+def LikeView(request, pk):
+    post = get_object_or_404(Post, id=request.POST.get('_id')) # creating a form and submitting it, getting post
+    # id, grabbing the button and getting info from post table
+    post.likes.add(request.user)
+    return HttpResponseRedirect(reverse('post-detail', args=[str(pk)]))
+
 
 
 def get_all_logged_in_users():
@@ -93,6 +103,7 @@ class PostListView(ListView):
 
 class PostDetailView(DetailView):
     model = Post
+    context_object_name = total_likes
 
 
 class PostCreateView(LoginRequiredMixin, CreateView):
