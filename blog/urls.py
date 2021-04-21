@@ -1,7 +1,5 @@
 from django.urls import path
 from . import views
-#from . import SendMessage
-
 
 urlpatterns = [
     path('', views.home, name='blog-home'),

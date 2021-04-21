@@ -24,6 +24,10 @@
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="/blog/inbox">Inbox({{unread}})</a>
+                    {% if unread != 0 %}
+                        <script language=javascript> alert("New messages, check your inbox")</script>
+                    {% endif %}
+
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/blog/profile">Profile</a>

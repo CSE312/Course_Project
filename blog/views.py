@@ -81,11 +81,11 @@ def demo(request):
 def SendMessage(request):
 	to_user = request.POST.get('to_user')
 	body = request.POST.get('body')
-	from_user = request.user
+	from_user = request.POST.get('from_user')
 
 	
 	Message.send_message(from_user, to_user, body)
-	return redirect('inbox')
+	return redirect('/blog/')
 
 
 @login_required
