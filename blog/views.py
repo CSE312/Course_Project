@@ -103,7 +103,7 @@ class PostListView(ListView):
 
 class PostDetailView(DetailView):
     model = Post
-    context_object_name = total_likes
+    # context_object_name = total_likes
 
 
 class PostCreateView(LoginRequiredMixin, CreateView):
