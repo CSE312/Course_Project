@@ -15,14 +15,14 @@ from django.views.generic import (
     CreateView,
     DeleteView)
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.http import HttpResponseRedirect
+# from django.http import HttpResponseRedirect
 
 
-def LikeView(request, pk):
-    post = get_object_or_404(Post, id=request.POST.get('_id')) # creating a form and submitting it, getting post
-    # id, grabbing the button and getting info from post table
-    post.likes.add(request.user)
-    return HttpResponseRedirect(reverse('post-detail', args=[str(pk)]))
+# def LikeView(request, pk):
+#     post = get_object_or_404(Post, id=request.POST.get('_id')) # creating a form and submitting it, getting post
+#     # id, grabbing the button and getting info from post table
+#     post.likes.add(request.user)
+#     return HttpResponseRedirect(reverse('post-detail', args=[str(pk)]))
 
 
 
