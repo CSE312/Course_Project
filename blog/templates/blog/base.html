@@ -27,10 +27,15 @@
                     {% if unread != 0 %}
                         <script language=javascript> alert("New messages, This alert won't dissapear until you check your inbox")</script>
                     {% endif %}
-
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/blog/post/new">Create a Post</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/blog/profile">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/blog/friends">Friends</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/logout">Logout</a>
@@ -49,9 +54,15 @@
 </head>
 <body>
     <div class="container">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="mt-2 alert alert-{{ message.tags }}">
+                    {{message}}
+                </div>
+            {% endfor %}
+        {% endif %}
 
     {% block content%}{% endblock %}
     </div>
-
 </body>
 </html>

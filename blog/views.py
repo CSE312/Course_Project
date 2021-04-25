@@ -8,6 +8,23 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.sessions.models import Session
 from django.utils import timezone
+from django.urls import reverse
+from django.shortcuts import render, get_object_or_404
+from django.views.generic import (
+    ListView,
+    DetailView,
+    CreateView,
+    DeleteView)
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.http import HttpResponseRedirect
+
+
+def LikeView(request, pk):
+    post = get_object_or_404(Post, id=request.POST.get('_id')) # creating a form and submitting it, getting post
+    # id, grabbing the button and getting info from post table
+    post.likes.add(request.user)
+    return HttpResponseRedirect(reverse('post-detail', args=[str(pk)]))
+
 
 
 def get_all_logged_in_users():
@@ -27,6 +44,21 @@ def get_all_users():
     return signed_up
 
 
+def home(request):
+    context = {
+        'posts': Post.objects.all()
+    }
+    print(context)
+    return render(request, 'blog/home.html', context)
+
+
+def demo(request):
+    context = {
+        'posts': Post.objects.all()
+    }
+    return render(request, 'blog/demo.html', context)
+
+
 # Create your views here.
 @login_required
 def home(request):
@@ -39,6 +71,17 @@ def home(request):
     logged_in = get_all_logged_in_users()
     context = {'profile': profiles, 'logged_in': logged_in, 'unread': i}
     return render(request, 'blog/Home.html', context)
+
+@login_required
+def friends(request):
+    profiles = get_all_users()
+    logged_in = get_all_logged_in_users()
+    context = {'profile': profiles, 'logged_in': logged_in}  # this is the old code with all signed up users
+    # displaying context = {'posts': Post.objects.all(), 'logged_in': logged_in} #
+    # Me trying to combine posts and users -> doesnt work
+    # context = {'posts': Post.objects.all()}
+    return render(request, 'blog/Friends.html', context)
+    # return render(request, 'blog/Home.html', context)
 
 
 @login_required
@@ -68,7 +111,6 @@ def profile(request):
     }
 
     return render(request, 'blog/Profile.html', context)
-
 
 def demo(request):
     context = {
@@ -146,3 +188,33 @@ def inbox(request):
         'unread':i
     }
     return render(request, 'blog/inbox.html', context)
+class PostListView(ListView):
+    model = Post
+    template_name = 'blog/Home.html'  # <app>/<model>_<viewtype>.html
+    context_object_name = 'posts'
+    ordering = ['-date_posted']
+
+
+class PostDetailView(DetailView):
+    model = Post
+    # context_object_name = total_likes
+
+
+class PostCreateView(LoginRequiredMixin, CreateView):
+    model = Post
+    fields = ['title', 'content']
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)  # setting author as current user before post is ran
+
+
+class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Post
+    success_url = '/blog'
+
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        return False

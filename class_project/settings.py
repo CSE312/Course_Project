@@ -14,9 +14,8 @@ from pathlib import Path
 import os
 import django_heroku
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+# Build paths inside the project like this: BASE_DIR / 'subdir'. Takes care of paths
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -27,9 +26,8 @@ SECRET_KEY = '48^+*2^^hua2i4-q0&5hy^ywus36kkh^p3fzp&t)&&-n_0rcg8'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-#For development purposes, allowing all hosts (helps with Docker component/containers). NOT IDEAL for production!
+# For development purposes, allowing all hosts (helps with Docker component/containers). NOT IDEAL for production!
 ALLOWED_HOSTS = ['*']
-
 
 # Application definition
 
@@ -77,7 +75,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'class_project.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
@@ -91,7 +88,6 @@ DATABASES = {
         'PORT': 5432,
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -111,7 +107,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
@@ -124,7 +119,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
@@ -140,9 +134,9 @@ LOGIN_URL = 'login'
 
 # For Uploading Profile Picture
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+MEDIA_URL = '/media/'  # Need root for media, how to create URL path of media
 
-#AWS IAM information (Image hosting) 
+# AWS IAM information (Image hosting)
 AWS_ACCESS_KEY_ID = 'AKIATTWR7B7RZEYWKOXP'
 AWS_SECRET_ACCESS_KEY = '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'
 AWS_STORAGE_BUCKET_NAME = 'cse312-project-files'
