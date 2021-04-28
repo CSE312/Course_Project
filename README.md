@@ -22,10 +22,12 @@ Features going to be implemented:
 
 4) Open http://localhost:8000/
    >`http://localhost:8000`
- [If nothing pops up on localhost:8000, please run step 3 again. If nothing continues to pop up, please run step 5, and run steps 2 and 3 again]
+ [If nothing pops up on localhost:8000, please run step 3 again. If nothing continues to pop up, please run step 5, and run steps 2,3, and 5a]
 
 5) (OPTIONAL) Once you are done with testing the database and web application, delete the docker composer.
    >`docker-compose down`
+5a) (OPTIONAL) Migrate database.
+   >`docker-compose run web python manage.py migrate`
    
 ## Side Note
 This is a Django application and it is currently deployed on a Heroku server.
