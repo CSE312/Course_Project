@@ -26,6 +26,7 @@ Features going to be implemented:
 
 5) (OPTIONAL) Once you are done with testing the database and web application, delete the docker composer.
    >`docker-compose down`
+
 5a) (OPTIONAL) Migrate database.
    >`docker-compose run web python manage.py migrate`
    
