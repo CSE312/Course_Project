@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
-import django_heroku
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -34,6 +34,8 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'channels',
+    'game',
     'authentication.apps.AuthenticationConfig',
     'direct_message.apps.DirectMessageConfig',
     'blog.apps.BlogConfig',
@@ -44,7 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'storages'
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -75,7 +77,31 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'class_project.wsgi.application'
+# Channels
+# WSGI_APPLICATION = 'tic_tac_toe.wsgi.application'
+# Channels
+ASGI_APPLICATION = "class_project.asgi.application"
+CHANNEL_LAYERS = {
+    'default': {
+        ## Method 1: Via redis lab
+        # 'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        # 'CONFIG': {
+        #     "hosts": [
+        #       'redis://h:le16Dn6dYwGHOZLF9vWxySxmQSIwE4Zz@redis-12573.c99.us-east-1-4.ec2.cloud.redislabs.com:12573' 
+        #     ],
+        # }
+        
+        ## Method 2: Via local redis
+        # 'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        # 'CONFIG': {
+        #     # "hosts": [('127.0.0.1', 6379)],
+        # },
+        
+        ## Method 3: Via In-memory channel layer
+        
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    },
+}
 
 
 # Database
@@ -132,6 +158,10 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
+
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # For redirecting Login and after Login
@@ -151,5 +181,3 @@ AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-
-django_heroku.settings(locals())
