@@ -4,7 +4,7 @@ from authentication.models import Profile
 from direct_message.models import Message
 from django.contrib.auth.decorators import login_required
 from authentication.forms import PictureUpdateForm, UserUpdateForm
-from django.contrib import messages
+from django.contrib import messages as messages1
 from django.contrib.auth.models import User
 from django.contrib.sessions.models import Session
 from django.utils import timezone
@@ -55,7 +55,7 @@ def profile(request):
         if info_form.is_valid() and picture_form.is_valid():
             info_form.save()
             picture_form.save()
-            messages.success(request, f'Account Successfully Updated!')
+            messages1.success(request, f'Account Successfully Updated!')
             return redirect('/blog/profile')
     else:
         info_form = UserUpdateForm(instance=request.user)
