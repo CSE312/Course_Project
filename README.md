@@ -31,8 +31,4 @@ Features going to be implemented:
 6) (OPTIONAL) Once you are done with testing the database and web application, delete the docker composer.
    >`docker-compose down`
    
-## Side Note
-This is a Django application and it is currently deployed on a Heroku server.
 
-**Link to site:**
-https://cse312-web-project.herokuapp.com/
